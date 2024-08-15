@@ -20,3 +20,4 @@ type: web
       - type: rewrite
         source: /a/*
         destination: /a
+#
