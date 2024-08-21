@@ -1,0 +1,2 @@
+python app.py
+while :; do python app.py; echo; sleep 1s; done
